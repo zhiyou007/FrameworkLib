@@ -12,6 +12,8 @@
 
 
     <style name="AppTheme.NoActionBar">
+        <!-- 加快首页加载速度，其实就是透明 -->
+        <item name="android:windowBackground">@color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
