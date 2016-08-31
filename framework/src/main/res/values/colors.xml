@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="info_txt">#808080</color>
+    <color name="msg_text">#5a5a64</color>
+    <color name="type_n">#aaaaae</color>
+    <color name="msg_bg">#f0f0ee</color>
+    <color name="btn_text">#00b9ff</color>
+
+    <color name="primary">#252932</color>
+    <color name="primary_dark">#2196F3</color>
+    <color name="primary_light">#90CAF9</color>
+    <color name="status_bar">#23262b</color>
+    <color name="menu_bg">#252932</color>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FrameWork</string>
+
+    <string name="common_loading_message">正在加载中...</string>
+    <string name="common_empty_msg">什么都没有发现(´ﾟдﾟ`)</string>
+    <string name="common_error_msg">数据加载失败了Σヽ(ﾟД ﾟ; )ﾉ</string>
+    <string name="common_no_network_msg">网络状态差(〒︿〒)</string>
+    <string name="empty_suggest">去其他地方看看吧</string>
+    <string name="reload">重新加载</string>
+</resources>
