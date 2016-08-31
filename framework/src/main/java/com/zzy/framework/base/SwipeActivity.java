@@ -21,9 +21,8 @@ import android.widget.FrameLayout;
 
 import com.zzy.framework.R;
 
-
 /**
- * 滑动关闭页面基类
+ * 滑动关闭页面基类，使用时继承此类并使用BlankTheme主题即可
  */
 public class SwipeActivity extends AppCompatActivity {
 
@@ -96,11 +95,6 @@ public class SwipeActivity extends AppCompatActivity {
             super.finish();
             overridePendingTransition(0, R.anim.slide_out_right);
         }
-    }
-    
-    public void onPreFinish()
-    {
-    	
     }
 
     class SwipeLayout extends FrameLayout {
@@ -354,7 +348,6 @@ public class SwipeActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
                         if (!mActivity.isFinishing()) {
                             swipeFinished = true;
-                            onPreFinish();
                             mActivity.finish();
                         }
                     }

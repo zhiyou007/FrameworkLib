@@ -1,10 +1,11 @@
-package com.zzy.pianyu;
+package com.zzy.pianyu.ui.activity;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,10 +18,17 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.zzy.framework.base.BaseActivity;
+import com.zzy.pianyu.R;
+
+import butterknife.Bind;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
     @Override
     protected View getLoadingTargetView() {
         return null;
@@ -38,12 +46,12 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initViewsAndEvents(Bundle savedInstanceState) {
-
+        //首页不能左划
         setSwipeEnabled(false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +60,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -60,6 +68,24 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     //    //是否statusBar 状态栏为透明 的方法 默认为真
@@ -105,12 +131,7 @@ public class MainActivity extends BaseActivity
 //
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+
     }
 
     @Override
