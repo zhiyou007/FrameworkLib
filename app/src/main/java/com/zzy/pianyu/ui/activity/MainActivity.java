@@ -1,4 +1,4 @@
-package com.zzy.pianyu.ui.activity;
+package com.zzy.pianyu;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -51,6 +51,10 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //去掉标题
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +64,7 @@ public class MainActivity extends BaseActivity
             }
         });
 
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
