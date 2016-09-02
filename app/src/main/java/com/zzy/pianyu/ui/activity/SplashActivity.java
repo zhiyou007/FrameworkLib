@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.framework.tools.Tools;
+import com.zzy.pianyu.ui.activity.MainActivity;
 import com.zzy.pianyu.R;
 
 import butterknife.Bind;
@@ -47,6 +48,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animator) {
                 Tools.goActivity(mContext,MainActivity.class,null,R.anim.alpha_in,R.anim.alpha_out,true);
+
             }
 
             @Override

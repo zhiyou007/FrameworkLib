@@ -40,5 +40,8 @@
     <color name="pink_800">#AD1457</color>
     <color name="pink_900">#880E4F</color>
 
+    <color name="type_n">#ffffff</color>
+    <color name="type_c">#2b2b2b</color>
+
 
 </resources>

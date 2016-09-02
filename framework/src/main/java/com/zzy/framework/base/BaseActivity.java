@@ -102,7 +102,7 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseImpl {
     protected abstract View getLoadingTargetView();
 
     /**
-     * get bundle data
+     * 传值
      *
      * @param extras
      */

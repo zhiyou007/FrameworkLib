@@ -1,10 +1,13 @@
-package com.zzy.pianyu;
+package com.zzy.pianyu.ui.activity;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,11 +17,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
+import com.zzy.pianyu.ui.adapter.CacheFragmentStatePagerAdapter;
+import com.zzy.pianyu.ui.fragment.HomeFragment;
+import com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip;
 
 import butterknife.Bind;
 
@@ -29,6 +33,16 @@ public class MainActivity extends BaseActivity
     DrawerLayout drawer;
     @Bind(R.id.fab)
     FloatingActionButton fab;
+
+    @Bind(R.id.mViewPager)
+    ViewPager mViewPager;
+
+    @Bind(R.id.tabs)
+    PagerSlidingTabStrip mTabStrip;
+
+
+    private TabsAdapter mTabAdapter = null;
+
     @Override
     protected View getLoadingTargetView() {
         return null;
@@ -54,6 +68,17 @@ public class MainActivity extends BaseActivity
         //去掉标题
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
+        mTabAdapter = new TabsAdapter(getSupportFragmentManager());
+        mViewPager.setOffscreenPageLimit(menus.length);
+        mViewPager.setAdapter(mTabAdapter);
+        mViewPager.setCurrentItem(0);
+
+
+        mTabStrip.setViewPager(mViewPager);
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +97,10 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
     }
 
 
@@ -183,5 +212,43 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private String[] menus = {"推荐","分类","片场"};
+
+
+    private class TabsAdapter extends CacheFragmentStatePagerAdapter {
+
+        public TabsAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        protected Fragment createItem(int position) {
+            Fragment f;
+            switch (position) {
+                default:
+                    f = HomeFragment.newInstance(position);
+                    break;
+                case 1:
+                    f = HomeFragment.newInstance(position);
+                    break;
+                case 2:
+                    f = HomeFragment.newInstance(position);
+                    break;
+            }
+            return f;
+        }
+
+        @Override
+        public int getCount() {
+            return menus.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return menus[position];
+        }
+
     }
 }

@@ -21,7 +21,33 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                app:allowWidthFull="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+                <!-- app:slidingBlock="@drawable/image_sliding_block"  android:background="@drawable/top_tab_bg" -->
+                <LinearLayout android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        style="@style/text_slidingTabTitle"
+                        android:text="广场"/>
+
+                    <TextView
+                        style="@style/text_slidingTabTitle"
+                        android:text="我的"/>
+
+                    <TextView
+                        style="@style/text_slidingTabTitle"
+                        android:text="收藏"/>
+
+                </LinearLayout>
+            </com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip>
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
