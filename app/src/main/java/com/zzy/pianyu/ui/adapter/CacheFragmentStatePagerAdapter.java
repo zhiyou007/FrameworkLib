@@ -25,6 +25,7 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 /**
+ * 带缓存功能
  * FragmentStatePagerAdapter that caches each pages.
  * FragmentStatePagerAdapter is also originally caches pages,
  * but its keys are not public nor documented, so depending
