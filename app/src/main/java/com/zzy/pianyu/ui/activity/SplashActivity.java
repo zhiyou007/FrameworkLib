@@ -2,13 +2,12 @@ package com.zzy.pianyu.ui.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.zzy.framework.base.BaseActivity;
-import com.zzy.framework.tools.Tools;
-import com.zzy.pianyu.ui.activity.MainActivity;
 import com.zzy.pianyu.R;
 
 import butterknife.Bind;
@@ -31,6 +30,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
+
     protected int getContentViewLayoutID() {
         return R.layout.activity_splash;
     }
@@ -47,8 +47,10 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                Tools.goActivity(mContext,MainActivity.class,null,R.anim.alpha_in,R.anim.alpha_out,true);
-
+                //Tools.goActivity(mContext,MainActivity.class,null,R.anim.alpha_in,R.anim.alpha_out,true);
+                Intent it = new Intent(mContext,MainActivity.class);
+                startActivity(it);
+                finish();
             }
 
             @Override

@@ -24,4 +24,8 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
     //UI注入式库
     compile 'com.jakewharton:butterknife:7.0.1'
+    //网络库
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    //json库
+    compile 'com.google.code.gson:gson:2.2.4'
 }

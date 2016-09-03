@@ -1,5 +1,6 @@
 package com.zzy.pianyu.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,12 +18,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
 import com.zzy.pianyu.ui.adapter.CacheFragmentStatePagerAdapter;
 import com.zzy.pianyu.ui.fragment.HomeFragment;
 import com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip;
+import com.zzy.tools.CircularAnim;
 
 import butterknife.Bind;
 
@@ -39,6 +43,8 @@ public class MainActivity extends BaseActivity
 
     @Bind(R.id.tabs)
     PagerSlidingTabStrip mTabStrip;
+
+    ImageView iv_author;
 
 
     private TabsAdapter mTabAdapter = null;
@@ -99,7 +105,22 @@ public class MainActivity extends BaseActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
+        iv_author = (ImageView)navigationView.getHeaderView(0).findViewById(R.id.iv_author);
+        iv_author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(mContext,"xxxxxx",Toast.LENGTH_SHORT).show();
+                // 先将颜色展出铺满，然后启动新的Activity
+                CircularAnim.fullActivity(MainActivity.this, view)
+                        .colorOrImageRes(R.color.primary)
+                        .go(new CircularAnim.OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                            }
+                        });
+            }
+        });
 
     }
 

@@ -12,8 +12,6 @@ import butterknife.Bind;
  * Created by zhiyou007 on 2016/9/2.
  */
 public class HomeFragment extends BaseFragment {
-    @Bind(R.id.tv_info)
-    TextView tv_info;
     private int pos;
     public static final HomeFragment newInstance(int pos)
     {
@@ -30,7 +28,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents() {
-        tv_info.setText(pos+"");
+
     }
 
     @Override
