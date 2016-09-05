@@ -3,7 +3,6 @@ package com.zzy.framework.base;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by zhiyou007 on 2015/10/27.
  */
-public abstract class BaseActivity extends SwipeActivity  implements BaseImpl {
+public abstract class BaseActivity extends SwipeActivity  implements BaseViewImpl {
     protected Context mContext = null;
     /**
      * Screen information

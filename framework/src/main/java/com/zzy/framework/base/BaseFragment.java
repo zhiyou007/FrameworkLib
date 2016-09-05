@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Fragment基础封装类
  * Created by zhiyou007 on 2015/10/26.
  */
-public abstract class BaseFragment extends Fragment implements BaseImpl {
+public abstract class BaseFragment extends Fragment implements BaseViewImpl {
     /**
      * Screen information
      */

@@ -1,9 +1,10 @@
 package com.zzy.framework.base;
 
 /**
+ * 基础界面回调（载入中/隐藏载入/显示错误(空页面，错误，网络)/网络接口请求回调）
  * Created by zhiyou007 on 2015/10/27.
  */
-public interface BaseImpl {
+public interface BaseViewImpl {
     /**
      * show loading message
      *

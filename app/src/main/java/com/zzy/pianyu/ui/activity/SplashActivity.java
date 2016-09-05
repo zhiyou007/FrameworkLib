@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
 
@@ -47,10 +48,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                //Tools.goActivity(mContext,MainActivity.class,null,R.anim.alpha_in,R.anim.alpha_out,true);
-                Intent it = new Intent(mContext,MainActivity.class);
-                startActivity(it);
-                finish();
+                Tools.goActivity(mContext,MainActivity.class,null,R.anim.alpha_in,R.anim.alpha_out,true);
             }
 
             @Override

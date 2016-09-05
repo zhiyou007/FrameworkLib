@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzy.pianyu">
+    <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 检测网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"

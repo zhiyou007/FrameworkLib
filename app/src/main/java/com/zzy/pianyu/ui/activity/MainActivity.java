@@ -90,8 +90,16 @@ public class MainActivity extends BaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                CircularAnim.fullActivity(MainActivity.this, view)
+                        .colorOrImageRes(R.color.primary)
+                        .go(new CircularAnim.OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                            }
+                        });
             }
         });
 
@@ -121,7 +129,6 @@ public class MainActivity extends BaseActivity
                         });
             }
         });
-
     }
 
 
@@ -142,47 +149,6 @@ public class MainActivity extends BaseActivity
         return super.onKeyDown(keyCode, event);
     }
 
-    //    //是否statusBar 状态栏为透明 的方法 默认为真
-//    protected boolean isTranslucentStatusBar() {
-//        return true;
-//    }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            if (isTranslucentStatusBar()) {
-//                Window window = getWindow();
-//                // Translucent status bar
-//                window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-//                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            }
-//        }
-//
-//
-//        setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-//    }
-//
     @Override
     public void onBackPressed() {
 
