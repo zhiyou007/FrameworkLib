@@ -21,9 +21,9 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseViewImp
     /**
      * Screen information
      */
-    protected int mScreenWidth = 0;
-    protected int mScreenHeight = 0;
-    protected float mScreenDensity = 0.0f;
+//    protected int mScreenWidth = 0;
+//    protected int mScreenHeight = 0;
+//    protected float mScreenDensity = 0.0f;
 
     private VaryViewHelperController mVaryViewHelperController = null;
 
