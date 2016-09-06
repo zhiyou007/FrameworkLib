@@ -20,13 +20,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <!-- 加快首页加载速度，其实就是透明 -->
-        <item name="android:windowBackground">@color/transparent</item>
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.ActionBar_StatusBarPrimaryDark" parent="AppTheme.NoActionBar">
