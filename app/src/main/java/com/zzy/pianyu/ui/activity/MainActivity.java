@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
 import com.zzy.pianyu.ui.adapter.CacheFragmentStatePagerAdapter;
@@ -170,6 +171,7 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Tools.goActivity(mContext,SettingActivity.class,null,0,0,false);
             return true;
         }
 
