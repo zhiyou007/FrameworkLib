@@ -1,12 +1,20 @@
 package com.zzy.pianyu.ui.fragment;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.zzy.framework.Tools.Logger;
 import com.zzy.framework.Tools.OkHttpClientManager;
 import com.zzy.framework.Tools.Tag;
@@ -65,6 +73,25 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
                 TextView tv_info = holder.getView(R.id.tv_info);
                 tv_info.setText(Html.fromHtml(jzBean.getContent()));
+
+                final ImageView iv_img = holder.getView(R.id.iv_img);
+
+                Glide.with(mContext)
+                        .load(jzBean.getImgurl())
+                        .into(iv_img);
+//                        .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+//                            @Override
+//                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+//                                int width = bitmap.getWidth();
+//                                int height = bitmap.getHeight();
+//
+//                                LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) iv_img.getLayoutParams();
+//                                linearParams.width = mScreenWidth/2;
+//                                linearParams.height = height*mScreenWidth/2/width;
+//                                iv_img.setLayoutParams(linearParams);
+//                                iv_img.setImageBitmap(bitmap);
+//                            }
+//                        });
             }
         };
         ry_view.setAdapter(mAdapter);
