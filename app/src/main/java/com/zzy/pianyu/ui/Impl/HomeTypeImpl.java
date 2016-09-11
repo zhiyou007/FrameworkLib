@@ -79,4 +79,12 @@ public class HomeTypeImpl extends BasePresenterImpl {
     public void onAfter() {
         super.onAfter();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -15,6 +15,9 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.liaoinstan.springview.container.DefaultFooter;
+import com.liaoinstan.springview.container.DefaultHeader;
+import com.liaoinstan.springview.widget.SpringView;
 import com.zzy.framework.Tools.Logger;
 import com.zzy.framework.Tools.OkHttpClientManager;
 import com.zzy.framework.Tools.Tag;
@@ -43,11 +46,16 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
     @Bind(R.id.ry_view)
     RecyclerView ry_view;
 
+    @Bind(R.id.refreshview)
+    SpringView springView;
+
     private CommonAdapter<JzBean> mAdapter;
 
     private ArrayList<JzBean> mDatas = new ArrayList<JzBean>();
 
     private int pos;
+
+    private StaggeredGridLayoutManager mStaggeredLayoutManager;
 
     private HomeTypeImpl mImpl;
     public static final HomeFragment newInstance(int pos)
@@ -65,8 +73,14 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
     @Override
     protected void initViewsAndEvents() {
-        ry_view.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        ry_view.setLayoutManager(mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         ry_view.setHasFixedSize(true);
+
+        springView.setHeader(new DefaultHeader(mContext));
+        springView.setFooter(new DefaultFooter(mContext));
+
+
+        mStaggeredLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mAdapter = new CommonAdapter<JzBean>(mContext,R.layout.cell_pianyu,mDatas) {
             @Override
             protected void convert(ViewHolder holder, JzBean jzBean, int position) {
@@ -78,24 +92,39 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
                 Glide.with(mContext)
                         .load(jzBean.getImgurl())
-                        .into(iv_img);
-//                        .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-//                            @Override
-//                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-//                                int width = bitmap.getWidth();
-//                                int height = bitmap.getHeight();
-//
-//                                LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) iv_img.getLayoutParams();
-//                                linearParams.width = mScreenWidth/2;
-//                                linearParams.height = height*mScreenWidth/2/width;
-//                                iv_img.setLayoutParams(linearParams);
-//                                iv_img.setImageBitmap(bitmap);
-//                            }
-//                        });
+                        .asBitmap()
+                        .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                            @Override
+                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                                int width = bitmap.getWidth();
+                                int height = bitmap.getHeight();
+
+                                LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) iv_img.getLayoutParams();
+                                linearParams.width = mScreenWidth/2;
+                                linearParams.height = height*mScreenWidth/2/width;
+                                iv_img.setLayoutParams(linearParams);
+                                iv_img.setImageBitmap(bitmap);
+                            }
+                        });
             }
         };
         ry_view.setAdapter(mAdapter);
         ry_view.setItemAnimator(new DefaultItemAnimator());
+
+
+        springView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                mImpl.setId(0);
+                mImpl.CommonGetData(Tag.EVENT_REFRESH_DATA);
+            }
+            @Override
+            public void onLoadmore() {
+                mImpl.setId(mDatas.get(mDatas.size()-1).getId());
+                mImpl.CommonGetData(Tag.EVENT_LOAD_MORE_DATA);
+            }
+        });
+
     }
 
     @Override
@@ -108,13 +137,20 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
     protected void onFirstUserVisible() {
         mImpl = new HomeTypeImpl(mContext,this,true);//true需要载入中的样式，就要定义上面载入中的TargetView
         //刷新
-        mImpl.CommonGetData(Tag.EVENT_REFRESH_DATA);
+        //mImpl.CommonGetData(Tag.EVENT_REFRESH_DATA);
+
+        springView.callFresh();
     }
 
     @Override
     public void CommonDataComing(int event_tag, Object data) {
         //网络
         Logger.info(data.toString());
+        if (event_tag == Tag.EVENT_REFRESH_DATA)
+        {
+            mDatas.clear();
+        }
+
         ArrayList<JzBean> temp = (ArrayList<JzBean>)data;
         if(null != temp && temp.size()>0)
         {
@@ -123,6 +159,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
         Logger.info(mDatas.size()+"----------------------");
         mAdapter.notifyDataSetChanged();
+
+        springView.onFinishFreshAndLoad();
 
     }
 
