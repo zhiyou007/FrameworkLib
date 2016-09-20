@@ -6,4 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="action_img">图片</string>
+    <string name="action_txt">文字</string>
+
 </resources>

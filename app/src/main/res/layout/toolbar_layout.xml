@@ -16,14 +16,13 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="">
-        <TextView
+        <TextView android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:text="设置"
             android:textColor="@android:color/white"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
 
     </android.support.v7.widget.Toolbar>
 

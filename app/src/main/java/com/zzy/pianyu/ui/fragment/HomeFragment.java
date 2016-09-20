@@ -73,7 +73,7 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
     @Override
     protected void initViewsAndEvents() {
-        ry_view.setLayoutManager(mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        ry_view.setLayoutManager(mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         ry_view.setHasFixedSize(true);
 
         springView.setHeader(new DefaultHeader(mContext));

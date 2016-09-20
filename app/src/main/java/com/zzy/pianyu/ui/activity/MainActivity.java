@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity
                         .go(new CircularAnim.OnAnimationEndListener() {
                             @Override
                             public void onAnimationEnd() {
-                                startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                                startActivity(new Intent(MainActivity.this, WbMakerActivity.class));
                             }
                         });
             }
@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity
                         .go(new CircularAnim.OnAnimationEndListener() {
                             @Override
                             public void onAnimationEnd() {
-                                startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                                startActivity(new Intent(MainActivity.this,SplashActivity.class));
                             }
                         });
             }
