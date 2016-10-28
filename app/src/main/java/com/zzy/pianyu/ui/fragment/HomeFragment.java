@@ -1,20 +1,24 @@
 package com.zzy.pianyu.ui.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Animatable;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
@@ -25,8 +29,8 @@ import com.zzy.framework.adater.recyleview.CommonAdapter;
 import com.zzy.framework.adater.recyleview.ViewHolder;
 import com.zzy.framework.base.BaseFragment;
 import com.zzy.framework.base.BaseHttpImpl;
+import com.zzy.framework.uihelper.ImgHelper;
 import com.zzy.pianyu.R;
-import com.zzy.pianyu.ui.Impl.BasePresenterImpl;
 import com.zzy.pianyu.ui.Impl.HomeTypeImpl;
 import com.zzy.pianyu.ui.bean.JzBean;
 
@@ -79,7 +83,7 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         springView.setHeader(new DefaultHeader(mContext));
         springView.setFooter(new DefaultFooter(mContext));
 
-
+        //位置发生变化
         mStaggeredLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mAdapter = new CommonAdapter<JzBean>(mContext,R.layout.cell_pianyu,mDatas) {
             @Override
@@ -88,26 +92,43 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                 TextView tv_info = holder.getView(R.id.tv_info);
                 tv_info.setText(Html.fromHtml(jzBean.getContent()));
 
-                final ImageView iv_img = holder.getView(R.id.iv_img);
+                final SimpleDraweeView iv_img = holder.getView(R.id.iv_img);
 
-                Glide.with(mContext)
-                        .load(jzBean.getImgurl())
-                        .asBitmap()
-                        .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-                            @Override
-                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                                int width = bitmap.getWidth();
-                                int height = bitmap.getHeight();
+                ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+                    @Override
+                    public void onFinalImageSet(
+                            String id,
+                            @Nullable ImageInfo imageInfo,
+                            @Nullable Animatable anim) {
+                        if (imageInfo == null) {
+                            return;
+                        }
+                        int imgWidth = imageInfo.getWidth();
+                        int imgHeight = imageInfo.getHeight();
+                        if (imgWidth != 0 && imgHeight != 0) {
+                            int wheight = (int) ((float) (mScreenWidth * imgHeight / imgWidth));
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                    RelativeLayout.LayoutParams.MATCH_PARENT, wheight);
+                            iv_img.setLayoutParams(params);
+                        }
+                    }
 
-                                LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams) iv_img.getLayoutParams();
-                                linearParams.width = mScreenWidth/2;
-                                linearParams.height = height*mScreenWidth/2/width;
-                                iv_img.setLayoutParams(linearParams);
-                                iv_img.setImageBitmap(bitmap);
-                            }
-                        });
+                    @Override
+                    public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+
+                    }
+
+                    @Override
+                    public void onFailure(String id, Throwable throwable) {
+
+                    }
+                };
+
+                ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
             }
         };
+
+
         ry_view.setAdapter(mAdapter);
         ry_view.setItemAnimator(new DefaultItemAnimator());
 
@@ -145,7 +166,7 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
     @Override
     public void CommonDataComing(int event_tag, Object data) {
         //网络
-        Logger.info(data.toString());
+
         if (event_tag == Tag.EVENT_REFRESH_DATA)
         {
             mDatas.clear();
@@ -156,8 +177,6 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         {
             mDatas.addAll(temp);
         }
-
-        Logger.info(mDatas.size()+"----------------------");
         mAdapter.notifyDataSetChanged();
 
         springView.onFinishFreshAndLoad();
