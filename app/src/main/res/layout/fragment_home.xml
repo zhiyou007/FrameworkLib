@@ -6,7 +6,8 @@
     <com.liaoinstan.springview.widget.SpringView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/refreshview">
+        android:id="@+id/refreshview"
+        android:layout_marginTop="5dp">
         <android.support.v7.widget.RecyclerView
             android:id = "@+id/ry_view"
             android:background="@color/white"

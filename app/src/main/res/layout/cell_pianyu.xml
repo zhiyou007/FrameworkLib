@@ -17,9 +17,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_info" />
 
-    <View android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#80808080" />
+        android:layout_height="10dp"
+        android:background="#f2f2f2" />
 </LinearLayout>
