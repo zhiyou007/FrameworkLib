@@ -4,18 +4,36 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fresco:actualImageScaleType="focusCrop" />
 
-    <TextView android:padding="5dp"
+    <include layout="@layout/card_header" />
+
+    <com.zzy.pianyu.ui.widgets.FlowLikeView
+        android:id="@+id/flowLikeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            fresco:actualImageScaleType="focusCrop" />
+
+    </com.zzy.pianyu.ui.widgets.FlowLikeView>
+
+    <com.zzy.pianyu.ui.widgets.JustifyTextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
         android:textSize="16sp"
+        android:minLines="3"
+        android:id="@+id/tv_info"
         android:lineSpacingMultiplier = "1.2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_info" />
+        android:textColor="#AAAAAA"/>
+
+    <include layout="@layout/card_footer" />
 
     <View
         android:layout_width="match_parent"

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:minHeight="40dp"
+    android:gravity="right|center">
+
+
+
+    <LinearLayout android:gravity="center"
+        android:id = "@+id/lly_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView android:layout_margin="5dp"
+            android:id = "@+id/iv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_icon_like_normal"/>
+        <TextView android:id = "@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#808080"
+            android:text="999"
+            android:textSize="10sp"
+            android:minWidth="30dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_icon_share_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999"
+            android:textColor="#808080"
+            android:textSize="10sp"
+            android:minWidth="30dp"/>
+    </LinearLayout>
+
+</LinearLayout>

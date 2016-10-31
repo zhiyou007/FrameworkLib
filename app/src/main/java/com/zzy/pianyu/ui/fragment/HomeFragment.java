@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -33,6 +32,8 @@ import com.zzy.framework.uihelper.ImgHelper;
 import com.zzy.pianyu.R;
 import com.zzy.pianyu.ui.Impl.HomeTypeImpl;
 import com.zzy.pianyu.ui.bean.JzBean;
+import com.zzy.pianyu.ui.widgets.FlowLikeView;
+import com.zzy.pianyu.ui.widgets.JustifyTextView;
 
 import org.json.JSONObject;
 
@@ -89,8 +90,18 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
             @Override
             protected void convert(ViewHolder holder, JzBean jzBean, int position) {
 
-                TextView tv_info = holder.getView(R.id.tv_info);
-                tv_info.setText(Html.fromHtml(jzBean.getContent()));
+                JustifyTextView tv_info = holder.getView(R.id.tv_info);
+                tv_info.setText(Html.fromHtml(jzBean.getContent()).toString());
+
+                final FlowLikeView flowLikeView = holder.getView(R.id.flowLikeView);
+
+                LinearLayout lly_like = holder.getView(R.id.lly_like);
+                lly_like.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        flowLikeView.addLikeView();
+                    }
+                });
 
                 final SimpleDraweeView iv_img = holder.getView(R.id.iv_img);
 
@@ -105,9 +116,13 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                         }
                         int imgWidth = imageInfo.getWidth();
                         int imgHeight = imageInfo.getHeight();
+
+                        Logger.info("width:"+imgWidth+"--height:"+imgHeight);
+
                         if (imgWidth != 0 && imgHeight != 0) {
+
                             int wheight = (int) ((float) (mScreenWidth * imgHeight / imgWidth));
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                                     RelativeLayout.LayoutParams.MATCH_PARENT, wheight);
                             iv_img.setLayoutParams(params);
                         }

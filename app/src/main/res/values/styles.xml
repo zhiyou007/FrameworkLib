@@ -31,6 +31,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">15.5dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">@color/color_type</item>
     </style>
 

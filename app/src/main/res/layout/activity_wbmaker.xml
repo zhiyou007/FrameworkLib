@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             app:fabGravity="bottom_end"
-            app:fabMenu="@menu/menu_main"
+            app:fabMenu="@menu/menu_make"
             app:miniFabBackgroundTint="@android:color/white"
             app:fabBackgroundTint = "@color/primary"
             app:miniFabDrawableTint="@color/primary"

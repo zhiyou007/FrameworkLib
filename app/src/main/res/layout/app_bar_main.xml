@@ -22,13 +22,16 @@
             android:fitsSystemWindows="true"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
             <com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:allowWidthFull="true"
                 android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp">
+                android:layout_marginRight="50dp"
+                app:slidingBlock="@drawable/pager_sliding_block">
                 <!-- app:slidingBlock="@drawable/image_sliding_block"  android:background="@drawable/top_tab_bg" -->
                 <LinearLayout android:gravity="center"
                     android:layout_width="match_parent"
@@ -45,6 +48,8 @@
 
                 </LinearLayout>
             </com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip>
+
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
