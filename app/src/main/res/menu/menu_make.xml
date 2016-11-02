@@ -17,8 +17,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <item
-        android:id="@+id/action_call"
+        android:id="@+id/action_share"
+        android:icon="@mipmap/action_img"
+        android:orderInCategory="100"
+        android:title="@string/action_share"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_crop"
+        android:icon="@mipmap/action_img"
+        android:orderInCategory="100"
+        android:title="@string/action_crop"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_txt_img"
+        android:icon="@mipmap/action_img"
+        android:orderInCategory="100"
+        android:title="@string/action_img_txt"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_img"
         android:icon="@mipmap/action_img"
         android:orderInCategory="100"
         android:title="@string/action_img"

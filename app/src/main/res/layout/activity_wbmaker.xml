@@ -5,18 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/toolbar_layout" />
-    <FrameLayout
+
+    <RelativeLayout
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ry_view">
 
+        </android.support.v7.widget.RecyclerView>
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:layout_margin="20dp"
             android:id="@+id/fab_speed_dial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             app:fabGravity="bottom_end"
             app:fabMenu="@menu/menu_make"
             app:miniFabBackgroundTint="@android:color/white"
@@ -24,6 +32,6 @@
             app:miniFabDrawableTint="@color/primary"
             app:miniFabTitleTextColor="@color/secondary_text" />
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -8,5 +8,8 @@
 
     <string name="action_img">图片</string>
     <string name="action_txt">文字</string>
+    <string name="action_img_txt">图片+文字</string>
+    <string name="action_crop">生成长图</string>
+    <string name="action_share">分享</string>
 
 </resources>
