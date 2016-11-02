@@ -94,6 +94,7 @@ public class WbMakerActivity extends BaseActivity {
                             mb.type = 2;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
+                            ry_view.scrollToPosition(mDatas.size());
                         }
                         break;
                     case R.id.action_text:
@@ -103,6 +104,7 @@ public class WbMakerActivity extends BaseActivity {
                             mb.type = 1;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
+                            ry_view.scrollToPosition(mDatas.size());
                         }
                         break;
                     case R.id.action_txt_img:
@@ -112,6 +114,7 @@ public class WbMakerActivity extends BaseActivity {
                             mb.type = 3;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
+                            ry_view.scrollToPosition(mDatas.size());
                         }
                         break;
                 }
