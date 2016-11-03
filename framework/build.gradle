@@ -20,8 +20,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:cardview-v7:24.2.0'
     //UI注入式库
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -31,14 +29,14 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     //刷新加载更多库 https://github.com/liaoinstan/SpringView
     compile 'com.liaoinstan.springview:library:1.2.6'
-
     compile 'io.github.yavski:fab-speed-dial:1.0.4'
-
     // 文本对齐
     //compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
-//    compile 'me.biubiubiu.justifytext:library:1.1'
+    //    compile 'me.biubiubiu.justifytext:library:1.1'
     //fb图片加载库
     compile 'com.facebook.fresco:fresco:0.9.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0+'
-
+    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
 }
