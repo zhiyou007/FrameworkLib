@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <LinearLayout android:minHeight="44dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <Button android:textColor="#808080" 
+            android:id="@+id/btn_no"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="18sp"
+            android:layout_marginLeft="5dp"/>
+        
+
+        <TextView android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:textColor="#808080"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:text="编辑"
+            android:visibility="invisible"/>
+
+        <Button android:textColor="#00aaff"
+            android:id="@+id/btn_ok"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定" 
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"/>
+        
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e6e6e6"/>
+    
+    
+    <EditText android:padding="5dp"
+        android:minHeight="50dp"
+        android:gravity="top"
+        android:background="@null"
+        android:id="@+id/et_intro"
+        android:textColor="@color/black"
+        android:maxLines="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:minLines="5">
+
+        <requestFocus />
+    </EditText>
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_margin="5dp">
+
+        <TextView android:textColor="#808080"
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="180 字"/>
+        
+    </LinearLayout>
+
+    
+
+</LinearLayout>

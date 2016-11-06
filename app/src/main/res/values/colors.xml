@@ -10,7 +10,9 @@
     <color name="divider">#B6B6B6</color>
     <color name="icons">#FFFFFF</color>
 
+    <color name="ef">#EFEFEF</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="transparent">@android:color/transparent</color>
 
 

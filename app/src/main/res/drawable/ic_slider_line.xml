@@ -8,16 +8,14 @@
         >
         <corners android:radius="1px"/>
         <stroke android:color="@color/slider_color"
-                android:width="2dp"
-            />
+                android:width="2dp"/>
         <size android:height="2dp"/>
     </shape>
 
 </item>
     <item >
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
-               android:shape="line"
-            >
+               android:shape="line">
             <corners android:radius="1px"/>
             <stroke android:color="@color/slider_color_normal"
                     android:width="2dp"

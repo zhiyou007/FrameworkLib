@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+
+        <RadioButton android:layout_weight="1.0"
+            android:id="@+id/rb_setPhoto1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#0f000000"
+            android:button="@null"
+            android:drawableTop="@drawable/add_dialog_camera"
+            android:gravity="center"
+            android:padding="30dip"
+            android:text="本地图片"
+            android:textColor="#ff7f50" />
+
+        <RadioButton android:layout_weight="1.0"
+            android:id="@+id/rb_setPhoto2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#0f000000"
+            android:button="@null"
+            android:drawableTop="@drawable/add_dialog_photo"
+            android:gravity="center"
+            android:padding="30dip"
+            android:layout_gravity="center"
+            android:text="网络图片"
+            android:textColor="#ff7f50" />
+
+    </RadioGroup>
+
+</RelativeLayout>

@@ -11,9 +11,10 @@
         android:layout_height="260dp"
         fresco:placeholderImage="@mipmap/default_image"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:actualImageScaleType="focusCrop" />
+        fresco:actualImageScaleType="fitCenter" />
 
     <TextView android:padding="10dip"
+        android:id="@+id/tv_info"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -170,7 +170,7 @@ public class SweetView extends View {
 
     public interface  AnimationListener{
 
-         void onStart();
+        void onStart();
         void onEnd();
         void onContentShow();
 
