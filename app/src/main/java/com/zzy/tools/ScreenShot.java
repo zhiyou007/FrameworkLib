@@ -17,6 +17,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -279,6 +280,49 @@ public class ScreenShot {
 		}
 //		Log.d(TAG, "实际高度:" + h);
 //		Log.d(TAG, "list 高度:" + listView.getHeight());
+		// 创建对应大小的bitmap
+		bitmap = Bitmap.createBitmap(listView.getWidth(), h,
+				Bitmap.Config.ARGB_8888);
+		final Canvas canvas = new Canvas(bitmap);
+		listView.draw(canvas);
+		// 测试输出
+		FileOutputStream out = null;
+		try {
+			out = new FileOutputStream("/sdcard/screen_test.png");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (null != out) {
+				bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+				out.flush();
+				out.close();
+			}
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+		return bitmap;
+	}
+
+
+	/**
+	 * 截图listview
+	 * **/
+	public static Bitmap getbBitmap(RecyclerView listView) {
+
+		Logger.info("子VIEW个数:" + listView.getChildCount());
+		int h = 0;
+		Bitmap bitmap = null;
+
+
+		// 获取listView实际高度
+		for (int i = 0; i < listView.getChildCount(); i++) {
+			h += listView.getChildAt(i).getHeight();
+			Logger.info(i+"--实际高度:" + h);
+			listView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
+		}
+		Logger.info("实际高度:" + h);
+		Logger.info("list 高度:" + listView.getHeight());
 		// 创建对应大小的bitmap
 		bitmap = Bitmap.createBitmap(listView.getWidth(), h,
 				Bitmap.Config.ARGB_8888);

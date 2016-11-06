@@ -3,6 +3,7 @@ package com.zzy.pianyu.ui.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenu;
@@ -40,11 +41,16 @@ import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.BlurEffect;
 import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.CustomDelegate;
 import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.RecyclerViewDelegate;
 import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.SweetSheet;
+import com.zzy.tools.ScreenShot;
 import com.zzy.tools.UIHelper;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
+import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultSubscriber;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
@@ -143,6 +149,18 @@ public class WbMakerActivity extends BaseActivity{
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
                             ry_view.scrollToPosition(mDatas.size()-1);
+                        }
+                        break;
+                    case R.id.action_crop:
+                        //生成长图
+                        {
+                            Bitmap bt = ScreenShot.getbBitmap(ry_view);
+                            if(bt!=null)
+                            {
+                                Tools.ToastMsg(mContext,"截屏成功");
+                            }else{
+                                Tools.ToastMsg(mContext,"截屏失败");
+                            }
                         }
                         break;
                 }
@@ -471,38 +489,38 @@ public class WbMakerActivity extends BaseActivity{
             switch(view.getId())
             {
                 case R.id.rb_setPhoto1:
-//                    RxGalleryFinal
-//                            .with(mContext)
-//                            .image()
-//                            .radio()
-//                            .crop()
-//                            .imageLoader(ImageLoaderType.FRESCO)
-//                            .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
-//                                @Override
-//                                protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
-//                                    //Toast.makeText(getBaseContext(), imageRadioResultEvent.getResult().getOriginalPath(), Toast.LENGTH_SHORT).show();
-//                                    MakerBean mb = mDatas.get(pos);
-//                                    mb.imgpath = imageRadioResultEvent.getResult().getOriginalPath();
-//                                    mAdapter.notifyDataSetChanged();
-//                                }
-//                            })
-//                            .openGallery();
+                    RxGalleryFinal
+                            .with(mContext)
+                            .image()
+                            .radio()
+                            .crop()
+                            .imageLoader(ImageLoaderType.FRESCO)
+                            .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
+                                @Override
+                                protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                                    //Toast.makeText(getBaseContext(), imageRadioResultEvent.getResult().getOriginalPath(), Toast.LENGTH_SHORT).show();
+                                    MakerBean mb = mDatas.get(pos);
+                                    mb.imgpath = imageRadioResultEvent.getResult().getCropPath();
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            })
+                            .openGallery();
                     alertDialog.dismiss();
                     break;
                 case R.id.rb_setPhoto2:
-//                    RxGalleryFinal
-//                            .with(mContext)
-//                            .image()
-//                            .radio()
-//                            .crop()
-//                            .imageLoader(ImageLoaderType.FRESCO)
-//                            .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
-//                                @Override
-//                                protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
-//                                    Toast.makeText(getBaseContext(), imageRadioResultEvent.getResult().getOriginalPath(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            })
-//                            .openGallery();
+                    RxGalleryFinal
+                            .with(mContext)
+                            .image()
+                            .radio()
+                            .crop()
+                            .imageLoader(ImageLoaderType.FRESCO)
+                            .subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
+                                @Override
+                                protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                                    Toast.makeText(getBaseContext(), imageRadioResultEvent.getResult().getCropPath(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .openGallery();
                     alertDialog.dismiss();
                     break;
             }
