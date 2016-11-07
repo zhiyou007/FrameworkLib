@@ -6,9 +6,8 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.internal.NavigationMenu;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -23,24 +22,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.framework.Tools.Tools;
-import com.zzy.framework.adater.recyleview.CommonMultiTypeAdapter;
-import com.zzy.framework.adater.recyleview.ViewHolder;
-import com.zzy.framework.adater.recyleview.base.ItemViewDelegate;
+import com.zzy.framework.adater.abslistview.CommonMultiTypeAdapter;
+import com.zzy.framework.adater.abslistview.ViewHolder;
+import com.zzy.framework.adater.abslistview.base.ItemViewDelegate;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
 import com.zzy.pianyu.ui.bean.MakerBean;
-import com.zzy.pianyu.ui.widgets.sweetsheet.entity.MenuEntity;
-import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.BlurEffect;
-import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.CustomDelegate;
-import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.RecyclerViewDelegate;
-import com.zzy.pianyu.ui.widgets.sweetsheet.sweetpick.SweetSheet;
+import com.zzy.pianyu.ui.widgets.NoScrollListView;
 import com.zzy.tools.ScreenShot;
 import com.zzy.tools.UIHelper;
 
@@ -64,8 +61,12 @@ public class WbMakerActivity extends BaseActivity{
     @Bind(R.id.tv_title)
     TextView tv_title;
 
-    @Bind(R.id.ry_view)
-    RecyclerView ry_view;
+    @Bind(R.id.lv_list)
+    NoScrollListView lv_list;
+
+    @Bind(R.id.scrollView)
+    ScrollView sc;
+
 
     @Bind(R.id.fab_speed_dial)
     FabSpeedDial fabSpeedDial;
@@ -100,11 +101,11 @@ public class WbMakerActivity extends BaseActivity{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        // 创建一个线性布局管理器
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        // 默认是Vertical，可以不写
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        ry_view.setLayoutManager(mLayoutManager);
+//        // 创建一个线性布局管理器
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//        // 默认是Vertical，可以不写
+//        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        ry_view.setLayoutManager(mLayoutManager);
 
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
@@ -128,17 +129,16 @@ public class WbMakerActivity extends BaseActivity{
                             mb.type = 2;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
-                            ry_view.scrollToPosition(mDatas.size()-1);
+                            ScrollDown(sc);
                         }
                         break;
                     case R.id.action_text:
-
                         {
                             MakerBean mb = new MakerBean();
                             mb.type = 1;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
-                            ry_view.scrollToPosition(mDatas.size()-1);
+                            ScrollDown(sc);
                         }
                         break;
                     case R.id.action_txt_img:
@@ -148,13 +148,13 @@ public class WbMakerActivity extends BaseActivity{
                             mb.type = 3;
                             mDatas.add(mb);
                             mAdapter.notifyDataSetChanged();
-                            ry_view.scrollToPosition(mDatas.size()-1);
+                            ScrollDown(sc);
                         }
                         break;
                     case R.id.action_crop:
                         //生成长图
                         {
-                            Bitmap bt = ScreenShot.getbBitmap(ry_view);
+                            Bitmap bt = ScreenShot.getbBitmap(lv_list);
                             if(bt!=null)
                             {
                                 Tools.ToastMsg(mContext,"截屏成功");
@@ -190,7 +190,7 @@ public class WbMakerActivity extends BaseActivity{
                     }
 
                     @Override
-                    public void convert(ViewHolder holder, MakerBean makerBean,final int position) {
+                    public void convert(ViewHolder holder, MakerBean makerBean, final int position) {
                         //图片长按编辑事件
                         SimpleDraweeView iv_img = holder.getView(R.id.iv_img);
                         iv_img.setOnLongClickListener(new View.OnLongClickListener() {
@@ -257,7 +257,7 @@ public class WbMakerActivity extends BaseActivity{
 
                     @Override
                     public void convert(ViewHolder holder, final MakerBean makerBean,final int position) {
-                        Tools.ToastMsg(mContext,"3");
+                        //Tools.ToastMsg(mContext,"3");
 
                         SimpleDraweeView iv_img = holder.getView(R.id.iv_img);
                         iv_img.setOnLongClickListener(new View.OnLongClickListener() {
@@ -286,8 +286,18 @@ public class WbMakerActivity extends BaseActivity{
             }
         };
 
-        ry_view.setAdapter(mAdapter);
+        lv_list.setAdapter(mAdapter);
 
+    }
+
+    public void ScrollDown(final ScrollView sc)
+    {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                sc.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
 
 

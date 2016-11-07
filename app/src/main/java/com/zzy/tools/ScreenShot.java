@@ -275,8 +275,10 @@ public class ScreenShot {
 		int h = 0;
 		Bitmap bitmap = null;
 		// 获取listView实际高度
+		Logger.info("count:"+listView.getChildCount());
 		for (int i = 0; i < listView.getChildCount(); i++) {
 			h += listView.getChildAt(i).getHeight();
+			listView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
 		}
 //		Log.d(TAG, "实际高度:" + h);
 //		Log.d(TAG, "list 高度:" + listView.getHeight());
