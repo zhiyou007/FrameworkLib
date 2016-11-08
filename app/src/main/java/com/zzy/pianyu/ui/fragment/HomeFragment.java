@@ -125,6 +125,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                                     RelativeLayout.LayoutParams.MATCH_PARENT, wheight);
                             iv_img.setLayoutParams(params);
+
+                            Logger.info("whight:"+wheight);
                         }
                     }
 
@@ -139,7 +141,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                     }
                 };
 
-                ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
+                ImgHelper.display(iv_img, "http://a4.topitme.com/l/201004/26/12722972267090.jpg", controllerListener);
+                //ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
             }
         };
 

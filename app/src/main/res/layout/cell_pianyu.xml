@@ -9,13 +9,15 @@
 
     <com.zzy.pianyu.ui.widgets.FlowLikeView
         android:id="@+id/flowLikeView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            fresco:placeholderImage="@mipmap/home_image_default"
+            fresco:placeholderImageScaleType="fitCenter"
             fresco:actualImageScaleType="focusCrop" />
 
     </com.zzy.pianyu.ui.widgets.FlowLikeView>
