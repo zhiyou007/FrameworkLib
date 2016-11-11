@@ -141,8 +141,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                     }
                 };
 
-                ImgHelper.display(iv_img, "http://a4.topitme.com/l/201004/26/12722972267090.jpg", controllerListener);
-                //ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
+                //ImgHelper.display(iv_img, "http://a3.topitme.com/7/d0/75/1132946949c5d75d07l.jpg", controllerListener);
+                ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
             }
         };
 

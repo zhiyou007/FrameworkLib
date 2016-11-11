@@ -101,6 +101,17 @@ public class WbMakerActivity extends BaseActivity{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tools.ToastMsg(mContext,"返回");
+                if(mDatas.size()>0)
+                {
+
+                }
+            }
+        });
+
 //        // 创建一个线性布局管理器
 //        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 //        // 默认是Vertical，可以不写
