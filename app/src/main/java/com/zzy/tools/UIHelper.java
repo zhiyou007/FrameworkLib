@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,9 @@ import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.Holder;
+import com.orhanobut.dialogplus.OnItemClickListener;
 
 /**
  * Created by zhiyou007 on 2015/10/9.
@@ -311,5 +315,20 @@ public class UIHelper {
                         .build();
         view.setController(controller);
     }
+
+
+
+    //显示弹出框
+    public static DialogPlus backDialog(Context contenxt,Holder holder,int gravity)
+    {
+        DialogPlus dialog = DialogPlus.newDialog(contenxt)
+                .setContentHolder(holder)
+                .setGravity(gravity)
+                .setCancelable(true)
+                .create();
+
+        return dialog;
+    }
+
 
 }

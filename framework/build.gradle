@@ -46,4 +46,6 @@ dependencies {
     compile 'cn.finalteam.rxgalleryfinal:library:0.0.3'
     // sheet   https://github.com/baoyongzhang/android-ActionSheet
 //    compile 'com.baoyz.actionsheet:library:1.1.7'
+    //https://github.com/orhanobut/dialogplus
+    compile 'com.orhanobut:dialogplus:1.11@aar'
 }

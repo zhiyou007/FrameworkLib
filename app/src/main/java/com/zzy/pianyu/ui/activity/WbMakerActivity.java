@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.dialogplus.DialogPlus;
 import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.adater.abslistview.CommonMultiTypeAdapter;
 import com.zzy.framework.adater.abslistview.ViewHolder;
@@ -95,6 +97,9 @@ public class WbMakerActivity extends BaseActivity{
 
     @Override
     protected void initViewsAndEvents(Bundle savedInstanceState) {
+
+        setSwipeEnabled(false);
+
         tv_title.setText("长微博制作器");
         //去掉标题
         setSupportActionBar(toolbar);
@@ -105,10 +110,7 @@ public class WbMakerActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 //Tools.ToastMsg(mContext,"返回");
-                if(mDatas.size()>0)
-                {
-
-                }
+                configBack();
             }
         });
 
@@ -301,6 +303,48 @@ public class WbMakerActivity extends BaseActivity{
 
     }
 
+    public void configBack()
+    {
+        if(mDatas.size()>0)
+        {
+            final DialogPlus dialogPlus = UIHelper.backDialog(mContext,new com.orhanobut.dialogplus.ViewHolder(R.layout.dialog_back),Gravity.BOTTOM);
+            Button btn_ok = (Button) dialogPlus.getHolderView().findViewById(R.id.btn_yes);
+            btn_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Tools.ToastMsg(mContext,"是");
+                    dialogPlus.dismiss();
+                }
+            });
+
+
+            Button btn_no = (Button) dialogPlus.getHolderView().findViewById(R.id.btn_no);
+            btn_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Tools.ToastMsg(mContext,"否");
+                    dialogPlus.dismiss();
+                }
+            });
+            dialogPlus.show();
+            Tools.ToastMsg(mContext,"xxxxxx");
+        }else{
+            finish();
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode)
+        {
+            case KeyEvent.KEYCODE_BACK:
+                configBack();
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void ScrollDown(final ScrollView sc)
     {
         new Handler().post(new Runnable() {
@@ -333,12 +377,12 @@ public class WbMakerActivity extends BaseActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
+//
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                finish();
+//                break;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
