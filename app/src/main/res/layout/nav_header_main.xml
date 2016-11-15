@@ -1,43 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
+    android:background="@color/white"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
     <!--
     android:background="@drawable/side_nav_bar"-->
-
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_author"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="20dp"
-        fresco:fadeDuration="300"
-        fresco:actualImageScaleType="focusCrop"
-        fresco:placeholderImage="@mipmap/face_default"
-        fresco:placeholderImageScaleType="focusCrop" />
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout android:background="#fafafa"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
-        android:text="未登录"
+        android:minHeight="200dp"
         android:gravity="center"
-        android:textColor="#2b2b2b"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:paddingTop="30dp"
+        android:orientation="vertical">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_author"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            fresco:fadeDuration="300"
+            fresco:roundAsCircle="true"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:placeholderImage="@mipmap/sidebar_icon_head"
+            fresco:placeholderImageScaleType="focusCrop" />
 
-    <TextView
-        android:textColor="#808080"
-        android:id="@+id/textView"
-        android:minHeight="30dp"
-        android:gravity="center"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:text="未登录"
+            android:gravity="center"
+            android:textColor="#2b2b2b"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:textColor="#808080"
+            android:id="@+id/textView"
+            android:minHeight="30dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击头像进行登录" />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="点击头像进行登录" />
+        android:paddingTop="20dp"
+        android:orientation="vertical">
+        <TextView android:drawableLeft="@mipmap/sidebar_icon_like"
+            android:drawablePadding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="60dp"
+            android:textSize="16sp"
+            android:textColor="@color/siler_setting"
+            android:text="@string/love"/>
+
+        <TextView android:drawableLeft="@mipmap/sidebar_icon_news"
+            android:drawablePadding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="60dp"
+            android:textSize="16sp"
+            android:textColor="@color/siler_setting"
+            android:text="@string/message"/>
+
+        <TextView android:drawableLeft="@mipmap/sidebar_icon_set"
+            android:drawablePadding="25dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="60dp"
+            android:textSize="16sp"
+            android:textColor="@color/siler_setting"
+            android:text="@string/setting"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0" />
+
+
+    <TextView android:drawableLeft="@mipmap/sidebar_icon_set"
+        android:drawablePadding="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="60dp"
+        android:textSize="16sp"
+        android:textColor="@color/siler_setting"
+        android:text="@string/setting"/>
+
+
+
 
 </LinearLayout>

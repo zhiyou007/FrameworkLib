@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.tabs)
     PagerSlidingTabStrip mTabStrip;
 
+    @Bind(R.id.iv_author)
     SimpleDraweeView iv_author;
 
 
@@ -111,11 +112,11 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        iv_author = (SimpleDraweeView)navigationView.getHeaderView(0).findViewById(R.id.iv_author);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//
+//
+//        iv_author = (SimpleDraweeView)navigationView.getHeaderView(0).findViewById(R.id.iv_author);
         iv_author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

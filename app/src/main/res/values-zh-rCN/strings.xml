@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">片语</string>
     <string name="setting">设置</string>
+    <string name="love">我的喜欢</string>
+    <string name="message">我的消息</string>
     <string name="bind_ever_note">绑定印象笔记</string>
     <string name="unbind_ever_note">解除印象笔记绑定</string>
     <string name="about">关于</string>
