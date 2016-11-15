@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:background="#ffffff"
     android:minHeight="60dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:paddingTop="30dp">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_graph"
         android:layout_width="50dp"

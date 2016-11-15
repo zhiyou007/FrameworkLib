@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.tabs)
     PagerSlidingTabStrip mTabStrip;
 
-    ImageView iv_author;
+    SimpleDraweeView iv_author;
 
 
     private TabsAdapter mTabAdapter = null;
@@ -114,7 +115,7 @@ public class MainActivity extends BaseActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        iv_author = (ImageView)navigationView.getHeaderView(0).findViewById(R.id.iv_author);
+        iv_author = (SimpleDraweeView)navigationView.getHeaderView(0).findViewById(R.id.iv_author);
         iv_author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
