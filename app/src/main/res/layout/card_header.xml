@@ -7,7 +7,7 @@
     android:background="#ffffff"
     android:minHeight="60dp"
     android:gravity="center_vertical"
-    android:paddingTop="30dp">
+    android:visibility="gone">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_graph"
         android:layout_width="50dp"

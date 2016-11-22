@@ -9,6 +9,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+
+
     <application android:name=".ui.PyApplication"
         android:allowBackup="true"
         android:largeHeap="true"
@@ -46,6 +52,9 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"/>
 
+
+        <meta-data android:value="55c8080a67e58e5d1b008825" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="android" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

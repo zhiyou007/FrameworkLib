@@ -21,6 +21,10 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
+import com.ufreedom.floatingview.Floating;
+import com.ufreedom.floatingview.FloatingBuilder;
+import com.ufreedom.floatingview.FloatingElement;
+import com.ufreedom.floatingview.effect.TranslateFloatingTransition;
 import com.zzy.framework.Tools.Logger;
 import com.zzy.framework.Tools.OkHttpClientManager;
 import com.zzy.framework.Tools.Tag;
@@ -54,6 +58,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
     @Bind(R.id.refreshview)
     SpringView springView;
 
+    private Floating mFloating;
+
     private CommonAdapter<JzBean> mAdapter;
 
     private ArrayList<JzBean> mDatas = new ArrayList<JzBean>();
@@ -81,6 +87,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         ry_view.setLayoutManager(mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         ry_view.setHasFixedSize(true);
 
+        mFloating = new Floating(getActivity());
+
         springView.setHeader(new DefaultHeader(mContext));
         springView.setFooter(new DefaultFooter(mContext));
 
@@ -96,10 +104,21 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                 final FlowLikeView flowLikeView = holder.getView(R.id.flowLikeView);
 
                 LinearLayout lly_like = holder.getView(R.id.lly_like);
+
+                //ImageView iv_like = (ImageView)holder.getView(R.id.iv_like);
+
                 lly_like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         flowLikeView.addLikeView();
+
+                        FloatingElement floatingElement = new FloatingBuilder()
+                                .anchorView(view)
+                                .targetView(R.layout.float_like)
+                                .floatingTransition(new TranslateFloatingTransition())
+                                .build();
+                        mFloating.startFloating(floatingElement);
+
                     }
                 });
 

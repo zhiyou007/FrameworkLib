@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.umeng.analytics.MobclickAgent;
 import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
@@ -68,6 +69,9 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initViewsAndEvents(Bundle savedInstanceState) {
+
+        MobclickAgent.setScenarioType(mContext, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
         //首页不能左划
         setSwipeEnabled(false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

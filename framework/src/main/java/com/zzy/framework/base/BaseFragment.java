@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zzy.framework.R;
 import com.zzy.framework.uihelper.VaryViewHelperController;
 
@@ -173,6 +174,8 @@ public abstract class BaseFragment extends Fragment implements BaseViewImpl {
         if (getUserVisibleHint()) {
             onUserVisible();
         }
+
+        MobclickAgent.onResume(mContext);
     }
 
     @Override
@@ -181,6 +184,8 @@ public abstract class BaseFragment extends Fragment implements BaseViewImpl {
         if (getUserVisibleHint()) {
             onUserInvisible();
         }
+
+        MobclickAgent.onPause(mContext);
     }
 
     @Override
