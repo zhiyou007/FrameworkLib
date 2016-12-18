@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zzy.framework.R;
 import com.zzy.framework.uihelper.VaryViewHelperController;
 
@@ -125,6 +126,18 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseViewImp
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(mContext);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(mContext);
+    }
+
 
 
     @Override
@@ -153,13 +166,6 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseViewImp
      */
     protected abstract void initViewsAndEvents(Bundle savedInstanceState);
 
-
-    public void onResume() {
-        super.onResume();
-    }
-    public void onPause() {
-        super.onPause();
-    }
 
 
 
