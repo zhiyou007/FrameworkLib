@@ -5,16 +5,21 @@ import android.text.TextUtils;
 import com.squareup.okhttp.Request;
 import com.zzy.framework.Tools.Logger;
 import com.zzy.framework.Tools.OkHttpClientManager;
+import com.zzy.pianyu.ui.Impl.CallBackData;
 import com.zzy.pianyu.ui.Impl.CommonData;
 import com.zzy.pianyu.ui.bean.ResponeInfo;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by zhiyou007 on 2015/10/9.
  */
 public class HttpUtils {
-
+    public static final String GETID = "http://121.41.88.44/pianyu/u.php";
+    public static final String LIST = "http://121.41.88.44/pianyu/getList.php";
+    public static final String DING = "http://121.41.88.44/pianyu/ding.php";
+    //public static final String LIST = "http://192.168.3.2/pianyu/getList.php";
     /**
      * POST非json格式
      * @param context
@@ -29,7 +34,6 @@ public class HttpUtils {
             public void onError(Request request, Exception e) {
                 callback.FailData(0, event_tag);
             }
-
             @Override
             public void onResponse(ResponeInfo response) {
                 //可以显示一个增加金币的功能
@@ -66,6 +70,36 @@ public class HttpUtils {
 
             @Override
             public void onResponse(ResponeInfo response) {
+                callback.CommonParseData(response,false,event_tag);
+            }
+
+            @Override
+            public void onBefore(Request request) {
+                super.onBefore(request);
+                callback.onBefore(request);
+            }
+
+            @Override
+            public void onAfter() {
+                super.onAfter();
+                callback.onAfter();
+            }
+        });
+    }
+
+
+    public static void get(Context context,String url,final int event_tag,final CallBackData callback)
+    {
+        OkHttpClientManager.getAsyn(url, new OkHttpClientManager.ResultCallback<String>() {
+            @Override
+            public void onError(Request request, Exception e) {
+
+                Logger.error(e.getMessage());
+                callback.FailData(e.hashCode(),event_tag);
+            }
+
+            @Override
+            public void onResponse(String response) {
                 callback.CommonParseData(response,false,event_tag);
             }
 

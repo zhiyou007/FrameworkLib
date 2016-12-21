@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/home_icon_share_normal"/>
 
-        <TextView
+        <TextView android:id="@+id/tv_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="999"

@@ -7,8 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,6 +40,8 @@ import com.facebook.imagepipeline.request.Postprocessor;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.Holder;
 import com.orhanobut.dialogplus.OnItemClickListener;
+
+import static android.text.TextUtils.isEmpty;
 
 /**
  * Created by zhiyou007 on 2015/10/9.
@@ -330,5 +336,70 @@ public class UIHelper {
         return dialog;
     }
 
+
+    /**
+     * deviceID的组成为：渠道标志+识别符来源标志+hash后的终端识别符
+     *
+     * 渠道标志为：
+     * 1，andriod（a）
+     *
+     * 识别符来源标志：
+     * 1， wifi mac地址（wifi）；
+     * 2， IMEI（imei）；
+     * 3， 序列号（sn）；
+     * 4， id：随机码。若前面的都取不到时，则随机生成一个随机码，需要缓存。
+     *
+     * @param context
+     * @return
+     */
+    public static String getDeviceId(Context context) {
+
+        String uuid = (String)SharedPreferencesUtils.getParam(context,"UUID","");
+        if(!TextUtils.isEmpty(uuid))
+        {
+            return uuid;
+        }
+
+
+        StringBuilder deviceId = new StringBuilder();
+        // 渠道标志
+        deviceId.append("a");
+
+        //IMEI（imei）
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imei = tm.getDeviceId();
+        if(!isEmpty(imei)){
+            deviceId.append("imei");
+            deviceId.append(imei);
+        }
+
+        //序列号（sn）
+        String sn = tm.getSimSerialNumber();
+        if(!isEmpty(sn)){
+            deviceId.append("sn");
+            deviceId.append(sn);
+        }
+
+
+        try {
+            //wifi mac地址
+            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = wifi.getConnectionInfo();
+            String wifiMac = info.getMacAddress();
+            if(!isEmpty(wifiMac)){
+                deviceId.append("wifi");
+                deviceId.append(wifiMac);
+            }
+        } catch (Exception e) {
+
+        }
+
+
+        uuid = MD5Util.getMD5String(deviceId.toString());
+        SharedPreferencesUtils.setParam(context,"UUID",uuid);
+
+        return uuid;
+
+    }
 
 }

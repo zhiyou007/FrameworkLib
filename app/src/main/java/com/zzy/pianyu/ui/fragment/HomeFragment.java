@@ -21,6 +21,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.liaoinstan.springview.container.DefaultFooter;
 import com.liaoinstan.springview.container.DefaultHeader;
 import com.liaoinstan.springview.widget.SpringView;
+import com.squareup.okhttp.Request;
 import com.ufreedom.floatingview.Floating;
 import com.ufreedom.floatingview.FloatingBuilder;
 import com.ufreedom.floatingview.FloatingElement;
@@ -28,19 +29,30 @@ import com.ufreedom.floatingview.effect.TranslateFloatingTransition;
 import com.zzy.framework.Tools.Logger;
 import com.zzy.framework.Tools.OkHttpClientManager;
 import com.zzy.framework.Tools.Tag;
+import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.adater.recyleview.CommonAdapter;
 import com.zzy.framework.adater.recyleview.ViewHolder;
 import com.zzy.framework.base.BaseFragment;
 import com.zzy.framework.base.BaseHttpImpl;
 import com.zzy.framework.uihelper.ImgHelper;
 import com.zzy.pianyu.R;
+import com.zzy.pianyu.ui.Impl.CallBackData;
 import com.zzy.pianyu.ui.Impl.HomeTypeImpl;
 import com.zzy.pianyu.ui.bean.JzBean;
 import com.zzy.pianyu.ui.widgets.FlowLikeView;
 import com.zzy.pianyu.ui.widgets.JustifyTextView;
+import com.zzy.tools.DES2;
+import com.zzy.tools.GsonTools;
+import com.zzy.tools.HttpUtils;
+import com.zzy.tools.MD5Util;
+import com.zzy.tools.UIHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -50,7 +62,7 @@ import butterknife.Bind;
  *
  * 如果需要
  */
-public class HomeFragment extends BaseFragment implements BaseHttpImpl {
+public class HomeFragment extends BaseFragment{
 
     @Bind(R.id.ry_view)
     RecyclerView ry_view;
@@ -68,7 +80,8 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
 
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
 
-    private HomeTypeImpl mImpl;
+
+    private int lid = 0;
     public static final HomeFragment newInstance(int pos)
     {
         HomeFragment fragment = new HomeFragment();
@@ -87,6 +100,9 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         ry_view.setLayoutManager(mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         ry_view.setHasFixedSize(true);
 
+
+
+
         mFloating = new Floating(getActivity());
 
         springView.setHeader(new DefaultHeader(mContext));
@@ -96,13 +112,16 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         mStaggeredLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mAdapter = new CommonAdapter<JzBean>(mContext,R.layout.cell_pianyu,mDatas) {
             @Override
-            protected void convert(ViewHolder holder, JzBean jzBean, int position) {
+            protected void convert(ViewHolder holder,final JzBean jzBean, int position) {
 
                 JustifyTextView tv_info = holder.getView(R.id.tv_info);
                 tv_info.setText(Html.fromHtml(jzBean.getContent()).toString());
 
-                final FlowLikeView flowLikeView = holder.getView(R.id.flowLikeView);
+                holder.setText(R.id.tv_like,String.valueOf(jzBean.getDing()));
+                holder.setText(R.id.tv_share,String.valueOf(jzBean.getShare()));
 
+                final FlowLikeView flowLikeView = holder.getView(R.id.flowLikeView);
+                final TextView tv_like = holder.getView(R.id.tv_like);
                 LinearLayout lly_like = holder.getView(R.id.lly_like);
 
                 //ImageView iv_like = (ImageView)holder.getView(R.id.iv_like);
@@ -110,15 +129,15 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                 lly_like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        flowLikeView.addLikeView();
+                        DingJZ(jzBean,view,flowLikeView,tv_like);
 
-                        FloatingElement floatingElement = new FloatingBuilder()
-                                .anchorView(view)
-                                .targetView(R.layout.float_like)
-                                .floatingTransition(new TranslateFloatingTransition())
-                                .build();
-                        mFloating.startFloating(floatingElement);
-
+//                        flowLikeView.addLikeView();
+//                        FloatingElement floatingElement = new FloatingBuilder()
+//                                .anchorView(view)
+//                                .targetView(R.layout.float_like)
+//                                .floatingTransition(new TranslateFloatingTransition())
+//                                .build();
+//                        mFloating.startFloating(floatingElement);
                     }
                 });
 
@@ -160,8 +179,16 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
                     }
                 };
 
-                //ImgHelper.display(iv_img, "http://a3.topitme.com/7/d0/75/1132946949c5d75d07l.jpg", controllerListener);
-                ImgHelper.display(iv_img, jzBean.getImgurl(), controllerListener);
+
+                try{
+                    String imgPath = jzBean.getImgurl();
+                    imgPath = DES2.decrypt(imgPath, MD5Util.key);
+                    ImgHelper.display(iv_img, imgPath, controllerListener);
+                }catch (Exception e)
+                {
+                    Logger.info("解密失败");
+                }
+
             }
         };
 
@@ -173,17 +200,137 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
         springView.setListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
-                mImpl.setId(0);
-                mImpl.CommonGetData(Tag.EVENT_REFRESH_DATA);
+                getData(Tag.EVENT_REFRESH_DATA);
             }
             @Override
             public void onLoadmore() {
-                mImpl.setId(mDatas.get(mDatas.size()-1).getId());
-                mImpl.CommonGetData(Tag.EVENT_LOAD_MORE_DATA);
+                getData(Tag.EVENT_LOAD_MORE_DATA);
             }
         });
 
     }
+
+
+    public void DingJZ(final JzBean jb,final View view,final FlowLikeView flowLikeView,final TextView tv_like)
+    {
+        try{
+            JSONObject json = new JSONObject();
+            json.put("lid",jb.getId());
+            json.put("ukey", UIHelper.getDeviceId(mContext));
+
+            String data = DES2.encrypt(json.toString(),MD5Util.key);
+            String urlpath = HttpUtils.DING+"?data="+ URLEncoder.encode(data,"utf-8");
+            Logger.info(urlpath);
+            HttpUtils.get(mContext, urlpath, Tag.EVENT_BEGIN, new CallBackData() {
+                @Override
+                public void CommonParseData(String data, boolean isCache, int event_tag) {
+                    Logger.info(data);
+                    try{
+                        JSONObject retJson = new JSONObject(data);
+                        int s = retJson.getInt("s");
+                        if(s==1)
+                        {
+                            jb.setDing(jb.getDing()+1);
+                            flowLikeView.addLikeView();
+                            FloatingElement floatingElement = new FloatingBuilder()
+                                    .anchorView(view)
+                                    .targetView(R.layout.float_like)
+                                    .floatingTransition(new TranslateFloatingTransition())
+                                    .build();
+                            mFloating.startFloating(floatingElement);
+
+                            tv_like.setText(String.valueOf(jb.getDing()));
+                        }else if(s == 2){
+                            flowLikeView.addLikeView();
+                        }else{
+                            Tools.ToastMsg(mContext,"内部错误,请稍后重试");
+                        }
+                    }catch (JSONException e)
+                    {
+
+                    }
+
+                }
+
+                @Override
+                public void FailData(int code, int event_tag) {
+
+                }
+
+                @Override
+                public void onBefore(Request request) {
+
+                }
+
+                @Override
+                public void onAfter() {
+
+                }
+            });
+
+        }catch (Exception e)
+        {
+
+        }
+
+
+    }
+
+
+
+
+    public void getData(int event_tag)
+    {
+        if(Tag.EVENT_REFRESH_DATA == event_tag)
+        {
+            lid = 0;
+        }
+        String urlpath = HttpUtils.LIST+"?lid="+lid+"&pos="+pos+"&size="+mDatas.size();
+        Logger.info(urlpath);
+        HttpUtils.get(mContext, urlpath, event_tag, new CallBackData() {
+            @Override
+            public void CommonParseData(String data, boolean isCache, int event_tag) {
+                try{
+                    JSONObject retJson = new JSONObject(data);
+                    int s = retJson.getInt("s");
+                    if(s==1)
+                    {
+                        JSONArray jzarray = retJson.getJSONArray("data");
+                        ArrayList<JzBean> temp = GsonTools.getInstance().getList(jzarray,JzBean.class);
+                        if(temp.size()==0)
+                        {
+                            Tools.ToastMsg(mContext,"没有更多内容了");
+                        }
+                        mDatas.addAll(temp);
+
+                        lid = mDatas.get(mDatas.size()-1).getId();
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }catch (JSONException e)
+                {
+
+                }
+
+            }
+
+            @Override
+            public void FailData(int code, int event_tag) {
+
+            }
+
+            @Override
+            public void onBefore(Request request) {
+
+            }
+
+            @Override
+            public void onAfter() {
+
+            }
+        });
+    }
+
+
 
     @Override
     protected int getContentViewLayoutID() {
@@ -193,32 +340,7 @@ public class HomeFragment extends BaseFragment implements BaseHttpImpl {
     //fragemnt第一次显示，才懒加载网络数据
     @Override
     protected void onFirstUserVisible() {
-        mImpl = new HomeTypeImpl(mContext,this,true);//true需要载入中的样式，就要定义上面载入中的TargetView
-        //刷新
-        //mImpl.CommonGetData(Tag.EVENT_REFRESH_DATA);
-
         springView.callFresh();
     }
-
-    @Override
-    public void CommonDataComing(int event_tag, Object data) {
-        //网络
-
-        if (event_tag == Tag.EVENT_REFRESH_DATA)
-        {
-            mDatas.clear();
-        }
-
-        ArrayList<JzBean> temp = (ArrayList<JzBean>)data;
-        if(null != temp && temp.size()>0)
-        {
-            mDatas.addAll(temp);
-        }
-        mAdapter.notifyDataSetChanged();
-
-        springView.onFinishFreshAndLoad();
-
-    }
-
 
 }

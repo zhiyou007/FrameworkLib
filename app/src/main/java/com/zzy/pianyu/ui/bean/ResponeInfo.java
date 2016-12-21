@@ -14,7 +14,7 @@ public class ResponeInfo {
 
     private int s;
     private String m;//服务器端返回的错误信息,只有S!=1的时候显示
-    private List<JzBean> d;
+    private List<JzBean> data;
 
 
     public int getS() {
@@ -26,11 +26,11 @@ public class ResponeInfo {
     }
 
     public List<JzBean> getD() {
-        return d;
+        return data;
     }
 
     public void setD(List<JzBean> d) {
-        this.d = d;
+        this.data = d;
     }
 
     public String getM() {
@@ -40,61 +40,5 @@ public class ResponeInfo {
     public void setM(String m) {
         this.m = m;
     }
-
-    //    int status = 0;
-//    String content;
-//    String message;
-//    String debug;
-//    String usetime;
-//    String coin = "0";
-//
-//    public int getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(int status) {
-//        this.status = status;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
-//
-//    public String getDebug() {
-//        return debug;
-//    }
-//
-//    public void setDebug(String debug) {
-//        this.debug = debug;
-//    }
-//
-//    public String getUsetime() {
-//        return usetime;
-//    }
-//
-//    public void setUsetime(String usetime) {
-//        this.usetime = usetime;
-//    }
-//
-//    public String getCoin() {
-//        return coin;
-//    }
-//
-//    public void setCoin(String coin) {
-//        this.coin = coin;
-//    }
-
 
 }

@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,14 +23,28 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.squareup.okhttp.Request;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.UMShareAPI;
+import com.zzy.framework.Tools.Logger;
+import com.zzy.framework.Tools.Tag;
 import com.zzy.framework.Tools.Tools;
 import com.zzy.framework.base.BaseActivity;
 import com.zzy.pianyu.R;
+import com.zzy.pianyu.ui.Impl.CallBackData;
 import com.zzy.pianyu.ui.adapter.CacheFragmentStatePagerAdapter;
 import com.zzy.pianyu.ui.fragment.HomeFragment;
 import com.zzy.pianyu.ui.widgets.PagerSlidingTabStrip;
+import com.zzy.tools.A;
 import com.zzy.tools.CircularAnim;
+import com.zzy.tools.DES2;
+import com.zzy.tools.HttpUtils;
+import com.zzy.tools.MD5Util;
+import com.zzy.tools.SharedPreferencesUtils;
+import com.zzy.tools.UIHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.Bind;
 
@@ -90,7 +105,7 @@ public class MainActivity extends BaseActivity
 
         mTabStrip.setViewPager(mViewPager);
 
-
+        getID();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -252,5 +267,60 @@ public class MainActivity extends BaseActivity
             return menus[position];
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    public void getID()
+    {
+        String uid = (String)SharedPreferencesUtils.getParam(mContext,A.TAGID,"");
+        if(!TextUtils.isEmpty(uid))
+        {
+            Logger.info("exists...");
+            return;
+        }
+        String id_url = HttpUtils.GETID+"?key="+ UIHelper.getDeviceId(mContext);
+        Logger.info(id_url);
+        HttpUtils.get(mContext, id_url, Tag.EVENT_BEGIN, new CallBackData() {
+            @Override
+            public void CommonParseData(String data,boolean cached, int event_tag) {
+                Logger.info("getid:"+data);
+                try {
+                    data = DES2.decrypt(data, MD5Util.key);
+                    JSONObject retJson = new JSONObject(data);
+                    String status = retJson.getString("s");
+                    if(status.equals("1"))
+                    {
+                        String uid = retJson.getString("uid");
+                        Logger.info("uid:"+uid);
+                        SharedPreferencesUtils.setParam(mContext, A.TAGID,uid);
+                    }
+                }catch(Exception e)
+                {
+                    Logger.error(e.getMessage());
+                }finally{
+
+                }
+            }
+
+            @Override
+            public void FailData(int code, int event_tag) {
+            }
+
+            @Override
+            public void onBefore(Request request) {
+
+            }
+
+            @Override
+            public void onAfter() {
+                //getID();
+            }
+        });
     }
 }

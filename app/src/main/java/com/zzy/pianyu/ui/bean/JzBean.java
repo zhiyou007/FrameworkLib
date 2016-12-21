@@ -23,6 +23,8 @@ public class JzBean {
     private String from;
     private String addtime;
     private String show_time;
+    private int ding;
+    private int share;
 
     public int getId() {
         return id;
@@ -86,5 +88,21 @@ public class JzBean {
 
     public void setShow_time(String show_time) {
         this.show_time = show_time;
+    }
+
+    public int getDing() {
+        return ding;
+    }
+
+    public void setDing(int ding) {
+        this.ding = ding;
+    }
+
+    public int getShare() {
+        return share;
+    }
+
+    public void setShare(int share) {
+        this.share = share;
     }
 }
