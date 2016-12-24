@@ -5,7 +5,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:orientation="vertical">
 
-    <com.zzy.pianyu.ui.widgets.sweetsheet.widget.FreeGrowUpParentRelativeLayout
+    <com.wzm.jokephoto.ui.widgets.sweetsheet.widget.FreeGrowUpParentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sheet_height"
@@ -34,6 +34,6 @@
             android:layout_marginTop="42dp"
             android:clipChildren="false"
             android:overScrollMode="never"/>
-    </com.zzy.pianyu.ui.widgets.sweetsheet.widget.FreeGrowUpParentRelativeLayout>
+    </com.wzm.jokephoto.ui.widgets.sweetsheet.widget.FreeGrowUpParentRelativeLayout>
 
 </FrameLayout>

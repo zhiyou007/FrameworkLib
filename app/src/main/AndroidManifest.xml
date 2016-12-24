@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zzy.pianyu">
+    package="com.wzm.jokephoto">
     <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 检测网络状态 -->
@@ -67,23 +67,23 @@
 
 
         <!-- 新浪 -->
-        <activity
-            android:name=".WBShareActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-            android:configChanges="keyboardHidden|orientation"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" >
-        </activity>
-        <service android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>
+        <!--<activity-->
+            <!--android:name="com.umenglibrary.WBShareActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:windowSoftInputMode="adjustResize"-->
+            <!--android:exported="false" >-->
+        <!--</activity>-->
+        <!--<service android:name="com.sina.weibo.sdk.net.DownloadService"-->
+            <!--android:exported="false"></service>-->
 
         <!-- weixin -->
         <activity
@@ -95,21 +95,31 @@
 
         <!-- qq -->
         <activity
-            android:name="com.tencent.tauth.AuthActivity"
+            android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tencent.connect.common.AssistActivity"
+            android:name="com.umeng.qq.tencent.AssistActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:theme="@style/Theme.UMDefault"
+            android:excludeFromRecents="true"
+            />
+
 
         <meta-data android:value="55c8080a67e58e5d1b008825" android:name="UMENG_APPKEY"/>
         <meta-data android:value="android" android:name="UMENG_CHANNEL"/>

@@ -7,7 +7,7 @@
 
     <include layout="@layout/card_header" />
 
-    <com.zzy.pianyu.ui.widgets.FlowLikeView
+    <com.wzm.jokephoto.ui.widgets.FlowLikeView
         android:id="@+id/flowLikeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,9 +20,9 @@
             fresco:placeholderImageScaleType="fitCenter"
             fresco:actualImageScaleType="focusCrop" />
 
-    </com.zzy.pianyu.ui.widgets.FlowLikeView>
+    </com.wzm.jokephoto.ui.widgets.FlowLikeView>
 
-    <com.zzy.pianyu.ui.widgets.JustifyTextView
+    <com.wzm.jokephoto.ui.widgets.JustifyTextView
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

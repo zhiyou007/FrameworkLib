@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jniLibs/'] } }
 }
 
 dependencies {
@@ -48,6 +49,9 @@ dependencies {
     compile 'com.orhanobut:dialogplus:1.11@aar'
     //https://github.com/UFreedom/FloatingView
     compile 'com.ufreedom.uikit:FloatingViewLib:1.0.2'
+
+    //compile project(':umenglibrary')
+
     //umeng
     compile 'com.umeng.analytics:analytics:latest.integration'
 }
