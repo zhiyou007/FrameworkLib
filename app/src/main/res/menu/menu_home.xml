@@ -25,5 +25,10 @@
         android:icon="@drawable/menu_add"
         app:showAsAction="always|withText" />
 
-
+    <item android:id="@+id/action_info"
+        android:title="信息"
+        android:visible="false"
+        android:orderInCategory="80"
+        android:icon="@mipmap/iv_info"
+        app:showAsAction="always|withText" />
 </menu>

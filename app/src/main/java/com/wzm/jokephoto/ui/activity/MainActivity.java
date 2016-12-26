@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.okhttp.Request;
@@ -23,6 +24,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMShareAPI;
 import com.wzm.framework.Tools.Logger;
 import com.wzm.framework.Tools.Tag;
+import com.wzm.framework.Tools.Tools;
 import com.wzm.framework.base.BaseActivity;
 import com.wzm.jokephoto.R;
 import com.wzm.jokephoto.ui.Impl.CallBackData;
@@ -57,6 +59,9 @@ public class MainActivity extends BaseActivity
 
     @Bind(R.id.iv_author)
     SimpleDraweeView iv_author;
+
+    @Bind(R.id.tv_mylove)
+    TextView tv_like;
 
 
     private TabsAdapter mTabAdapter = null;
@@ -144,6 +149,21 @@ public class MainActivity extends BaseActivity
                         });
             }
         });
+
+
+        tv_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CircularAnim.fullActivity(MainActivity.this, v)
+                        .colorOrImageRes(R.color.primary)
+                        .go(new CircularAnim.OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                startActivity(new Intent(MainActivity.this,MyLikeActivity.class));
+                            }
+                        });
+            }
+        });
     }
 
 
@@ -172,8 +192,8 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_home, menu);
-        return false;
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
     }
 
     @Override
@@ -181,13 +201,13 @@ public class MainActivity extends BaseActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
+        int id = item.getItemId();
 //
 //        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            Tools.goActivity(mContext,SettingActivity.class,null,0,0,false);
-//            return true;
-//        }
+        if (id == R.id.action_settings) {
+            Tools.goActivity(mContext,SettingActivity.class,null,0,0,false);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -195,7 +215,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
-        menu.findItem(R.id.action_add).setVisible(true);
+        //menu.findItem(R.id.action_add).setVisible(true);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -274,7 +294,6 @@ public class MainActivity extends BaseActivity
         String uid = (String)SharedPreferencesUtils.getParam(mContext,A.TAGID,"");
         if(!TextUtils.isEmpty(uid))
         {
-            Logger.info("exists...");
             return;
         }
         String id_url = HttpUtils.GETID+"?key="+ UIHelper.getDeviceId(mContext);
@@ -290,7 +309,6 @@ public class MainActivity extends BaseActivity
                     if(status.equals("1"))
                     {
                         String uid = retJson.getString("uid");
-                        Logger.info("uid:"+uid);
                         SharedPreferencesUtils.setParam(mContext, A.TAGID,uid);
                     }
                 }catch(Exception e)

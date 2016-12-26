@@ -3,6 +3,7 @@ package com.wzm.framework.base;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -22,9 +23,9 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseViewImp
     /**
      * Screen information
      */
-//    protected int mScreenWidth = 0;
-//    protected int mScreenHeight = 0;
-//    protected float mScreenDensity = 0.0f;
+    protected int mScreenWidth = 0;
+    protected int mScreenHeight = 0;
+    protected float mScreenDensity = 0.0f;
 
     private VaryViewHelperController mVaryViewHelperController = null;
 
@@ -56,11 +57,11 @@ public abstract class BaseActivity extends SwipeActivity  implements BaseViewImp
 //        }
 
           //获取屏幕宽度高度的需求
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        mScreenDensity = displayMetrics.density;
-//        mScreenHeight = displayMetrics.heightPixels;
-//        mScreenWidth = displayMetrics.widthPixels;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        mScreenDensity = displayMetrics.density;
+        mScreenHeight = displayMetrics.heightPixels;
+        mScreenWidth = displayMetrics.widthPixels;
 
 
 

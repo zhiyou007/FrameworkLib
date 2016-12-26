@@ -18,6 +18,7 @@ public class HttpUtils {
     public static final String GETID = "http://121.41.88.44/pianyu/u.php";
     public static final String LIST = "http://121.41.88.44/pianyu/getList.php";
     public static final String DING = "http://121.41.88.44/pianyu/ding.php";
+    public static final String MYLIKE="http://121.41.88.44/pianyu/getMyLike.php";
     //public static final String LIST = "http://192.168.3.2/pianyu/getList.php";
     /**
      * POST非json格式
