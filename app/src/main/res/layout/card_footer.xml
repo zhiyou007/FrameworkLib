@@ -7,6 +7,26 @@
     android:minHeight="40dp"
     android:gravity="right|center">
 
+    <LinearLayout android:gravity="center"
+        android:id = "@+id/lly_edit"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="80dp">
+
+        <ImageView android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_icon_edit"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#808080"
+            android:text="编辑"
+            android:textSize="10sp"
+            android:minWidth="30dp"/>
+
+    </LinearLayout>
 
 
     <LinearLayout android:gravity="center"

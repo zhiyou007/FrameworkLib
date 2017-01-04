@@ -28,6 +28,7 @@ import com.wzm.framework.Tools.Tools;
 import com.wzm.framework.base.BaseActivity;
 import com.wzm.jokephoto.R;
 import com.wzm.jokephoto.ui.Impl.CallBackData;
+import com.wzm.jokephoto.ui.PyApplication;
 import com.wzm.jokephoto.ui.adapter.CacheFragmentStatePagerAdapter;
 import com.wzm.jokephoto.ui.fragment.HomeFragment;
 import com.wzm.jokephoto.ui.widgets.PagerSlidingTabStrip;
@@ -304,11 +305,13 @@ public class MainActivity extends BaseActivity
                 Logger.info("getid:"+data);
                 try {
                     data = DES2.decrypt(data, MD5Util.key);
+                    Logger.info("getid:"+data);
                     JSONObject retJson = new JSONObject(data);
                     String status = retJson.getString("s");
                     if(status.equals("1"))
                     {
                         String uid = retJson.getString("uid");
+                        PyApplication.iAd = retJson.getInt("uad");
                         SharedPreferencesUtils.setParam(mContext, A.TAGID,uid);
                     }
                 }catch(Exception e)

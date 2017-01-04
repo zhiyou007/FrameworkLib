@@ -14,6 +14,7 @@ import com.wzm.tools.ImagePipelineConfigFactory;
  * Created by zhiyou007 on 2016/10/28.
  */
 public class PyApplication extends Application {
+    public static int iAd = 0;
     @Override
     public void onCreate() {
         super.onCreate();

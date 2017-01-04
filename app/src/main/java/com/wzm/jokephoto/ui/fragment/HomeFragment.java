@@ -164,7 +164,7 @@ public class HomeFragment extends BaseFragment{
                         int imgWidth = imageInfo.getWidth();
                         int imgHeight = imageInfo.getHeight();
 
-                        Logger.info("width:"+imgWidth+"--height:"+imgHeight);
+                        //Logger.info("width:"+imgWidth+"--height:"+imgHeight);
 
                         if (imgWidth != 0 && imgHeight != 0) {
 
@@ -173,7 +173,7 @@ public class HomeFragment extends BaseFragment{
                                     RelativeLayout.LayoutParams.MATCH_PARENT, wheight);
                             iv_img.setLayoutParams(params);
 
-                            Logger.info("whight:"+wheight);
+                            //Logger.info("whight:"+wheight);
                         }
                     }
 
