@@ -7,6 +7,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.wzm.framework.Tools.Logger;
+import com.wzm.framework.Tools.Tools;
 import com.wzm.framework.uihelper.ImgHelper;
 
 /**
@@ -106,6 +107,7 @@ public class ShareManager {
                 pic = DES2.decrypt(pic, MD5Util.key);
             }catch (Exception e)
             {
+                Tools.ToastMsg(activity,"处理图片失败");
                 Logger.info("解密失败");
             }
         }
@@ -114,6 +116,7 @@ public class ShareManager {
                 .withMedia(image)
                 .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setCallback(umShareListener).open();
+
     }
 //
 //    public void initShare(Activity activity, String id, String share_content, int pic, String

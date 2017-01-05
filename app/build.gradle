@@ -8,17 +8,17 @@ android {
         applicationId "com.wzm.jokephoto"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 15
+        versionName "1.5"
 
         multiDexEnabled true
     }
     buildTypes {
         release {
-//            minifyEnabled true
-//            zipAlignEnabled true
-//            shrinkResources true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }

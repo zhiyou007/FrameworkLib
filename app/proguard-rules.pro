@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
-# By default_image, the flags in this file are appended to flags specified
-# in D:\eclipse_android\adt-bundle-windows-x86_64-20140702\sdk/tools/proguard/proguard-android.txt
+# By default, the flags in this file are appended to flags specified
+# in E:\adt-bundle-windows-x86_64-20140702\sdk/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -15,6 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
 
 -keepattributes EnclosingMethod
 
@@ -111,8 +112,6 @@
  -keep public interface com.umeng.socialize.**
  -keep public interface com.umeng.socialize.sensor.**
  -keep public interface com.umeng.scrshot.**
- -keep public interface android.widget.**
-
 
  -keep public class com.umeng.socialize.* {*;}
  -keep public class javax.**
@@ -184,7 +183,7 @@
     public static ** valueOf(java.lang.String);
 }
 
--keep class com.wzm.bean.** {*; }
+-keep class com.wzm.jokephoto.ui.bean.** {*; }
 
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
@@ -244,6 +243,10 @@
 -keep class java.nio.**{*; }
 
 -dontwarn org.codehaus.**
+
+
+
+
 -keep class org.codehaus.**
 -keep class org.codehaus.**{*; }
 
@@ -313,6 +316,8 @@
 -dontwarn com.github.mikephil.charting.data.realm.**
 #MPAndroidChart end
 
+
+#1.support-v7-appcompat
 -keep public class android.support.v7.widget.** { *; }
 -keep public class android.support.v7.internal.widget.** { *; }
 -keep public class android.support.v7.internal.view.menu.** { *; }
@@ -388,11 +393,12 @@
    *** get*();
 }
 
-#8.support-design
--dontwarn android.support.design.**
--keep class android.support.design.** { *; }
--keep interface android.support.design.** { *; }
--keep public class android.support.design.R$* { *; }
+-dontwarn com.bumptech.**
+-dontwarn com.squareup.**
+-dontwarn com.nostra13.**
 
-#9.picasso
--dontwarn com.squareup.okhttp.**
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
